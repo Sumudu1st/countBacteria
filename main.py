@@ -1,14 +1,9 @@
 import cv2
-import numpy as np
+
 
 # Open the video file
 video_path = "bac1.mp4"
 cap = cv2.VideoCapture(video_path)
-
-# Check if the video file is opened successfully
-if not cap.isOpened():
-    print("Error: Could not open video.")
-    exit()
 
 while True:
     # Read a frame from the video
@@ -29,6 +24,12 @@ while True:
 
     # Draw contours on the original frame
     cv2.drawContours(frame, contours, -1, (0, 255, 0), 2)
+
+    # Get the number of bacteria
+    number_of_bacteria = len(contours)
+
+    # Display the bacteria count on the frame
+    cv2.putText(frame, f'Bacteria Count: {number_of_bacteria}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
     # Display the frame
     cv2.imshow("Bacteria Detection", frame)
